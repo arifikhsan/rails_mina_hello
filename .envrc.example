@@ -5,3 +5,4 @@ export RAILS_ENV=production
 export RACK_ENV=production
 export LANG=en_US.UTF-8
 export RAILS_MASTER_KEY=299e59a2766103f5e21ed5bc0b693d8b
+export RAILS_MINA_HELLO_DATABASE_URL="postgres://udin:@localhost/rails_mina_hello_production"
