@@ -82,5 +82,5 @@ test:
 production:
   <<: *default
   database: rails_mina_hello_production
-  username: rails_mina_hello
+  username: <%= ENV['RAILS_MINA_HELLO_DATABASE_USERNAME'] %>
   password: <%= ENV['RAILS_MINA_HELLO_DATABASE_PASSWORD'] %>
