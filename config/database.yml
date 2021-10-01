@@ -80,8 +80,8 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
+  <<: *default
   url: <%= ENV['RAILS_MINA_HELLO_DATABASE_URL'] %>
-  # <<: *default
   # database: rails_mina_hello_production
   # username: <%= ENV['RAILS_MINA_HELLO_DATABASE_USERNAME'] %>
   # password: <%= ENV['RAILS_MINA_HELLO_DATABASE_PASSWORD'] %>
