@@ -56,3 +56,7 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 gem "mina", "~> 1.2"
+
+gem "mina-npm", "~> 1.0"
+
+gem "mina1-yarn", "~> 0.1.0"

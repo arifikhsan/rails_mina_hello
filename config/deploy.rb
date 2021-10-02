@@ -2,6 +2,8 @@ require 'mina/rails'
 require 'mina/git'
 require 'mina/rbenv'  # for rbenv support. (https://rbenv.org)
 # require 'mina/rvm'    # for rvm support. (https://rvm.io)
+require 'mina/npm'
+require 'mina/yarn'
 
 # Basic settings:
 #   domain       - The hostname to SSH to.
@@ -24,7 +26,7 @@ set :user, 'udin'          # Username in the server to SSH to.
 # Some plugins already add folders to shared_dirs like `mina/rails` add `public/assets`, `vendor/bundle` and many more
 # run `mina -d` to see all folders and files already included in `shared_dirs` and `shared_files`
 # set :shared_dirs, fetch(:shared_dirs, []).push('public/assets')
-set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/master.key', 'config/credentials.yml.enc')
+set :shared_files, fetch(:shared_files, []).push('config/database.yml', 'config/master.key')
 
 # This task is the environment that is loaded for all remote run commands, such as
 # `mina deploy` or `mina rake`.
@@ -43,6 +45,9 @@ task :setup do
   # command %{rbenv install 2.5.3 --skip-existing}
   # command %{rvm install ruby-2.5.3}
   # command %{gem install bundler}
+
+  command %[touch "#{fetch(:shared_path)}/config/database.yml"]
+  comment "Be sure to edit '#{fetch(:shared_path)}/config/database.yml'"
 end
 
 desc "Deploys the current version to the server."
@@ -55,6 +60,7 @@ task :deploy do
     invoke :'git:clone'
     invoke :'deploy:link_shared_paths'
     invoke :'bundle:install'
+    # invoke :'npm:install'
     invoke :'rails:db_migrate'
     invoke :'rails:assets_precompile'
     invoke :'deploy:cleanup'
